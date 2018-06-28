@@ -2,6 +2,17 @@ import XCTest
 @testable import RegExp
 
 final class RegExpTests: XCTestCase {
+    func testHasMatch() {
+        let text = "We are big now #1#**lot of sales#/1#* the money and cards #2#Rober Langdon and Ambra Vidal#/2#**."
+        let re = RegExp("(#/{0,1}\\d{1,}#\\*{0,2})")
+
+        XCTAssertTrue(re.hasMatch(in: text))
+
+        let nonMatchingText = "I do not match"
+
+        XCTAssertFalse(re.hasMatch(in: nonMatchingText))
+    }
+
     func testMatches() {
         let text = "We are big now #1#**lot of sales#/1#* the money and cards #2#Rober Langdon and Ambra Vidal#/2#**."
         let re = RegExp("(#/{0,1}\\d{1,}#\\*{0,2})")
@@ -23,6 +34,7 @@ final class RegExpTests: XCTestCase {
     }
 
     static var allTests = [
+        ("testHasMatch", testHasMatch),
         ("testMatches", testMatches),
         ("testReplace", testReplace),
     ]

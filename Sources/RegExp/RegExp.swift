@@ -1,9 +1,11 @@
 import Foundation
 
-// TODO: Introduce Pattern super-protocol?
-// TODO: Maybe `replace` should be a string extension?
 // TODO: Try to make similar to DatePattern
-// TODO: Add isMatching
+// TODO: Add isMatching -> hasMatch()
+// TODO: Add =~ operator
+// TODO: Add replace with string
+// TODO: Add firstMatch
+// TODO: add escape()
 
 // https://jayeshkawli.ghost.io/regular-expressions-in-swift-ios/
 
@@ -17,6 +19,10 @@ public struct RegExp: StringPattern {
         } catch {
             preconditionFailure("Illegal regular expression: \(pattern).")
         }
+    }
+
+    public func hasMatch(in string: String) -> Bool {
+        return nsRegExp.numberOfMatches(in: string, options: [], range: NSRange(string.startIndex..., in: string)) > 0
     }
 
     public func matches(in string: String) -> [StringMatch] {
