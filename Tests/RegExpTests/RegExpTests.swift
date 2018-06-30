@@ -26,11 +26,15 @@ final class RegExpTests: XCTestCase {
     func testReplace() {
         let text = "bad wolf, bad dog, Bad sheep"
         let re = RegExp("\\b([bB]ad)\\b")
-        let replaced = re.replace(in: text) { match in
+        let replaced = re.stringByReplacingMatches(in: text) { match in
             return "[\(match.value.lowercased())]"
         }
 
         XCTAssertEqual(replaced, "[bad] wolf, [bad] dog, [bad] sheep")
+
+        let replacedHello = re.stringByReplacingMatches(in: text, with: "HELLO")
+
+        XCTAssertEqual(replacedHello, "HELLO wolf, HELLO dog, HELLO sheep")
     }
 
     static var allTests = [

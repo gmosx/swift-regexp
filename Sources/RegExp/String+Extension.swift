@@ -3,8 +3,12 @@ extension String {
         return pattern.hasMatch(in: self)
     }
 
-    public func replacing(pattern: StringPattern, handler: (StringMatch) -> String?) -> String {
-        return pattern.replace(in: self, handler: handler)
+    public func replacingMatches(of pattern: StringPattern, with replaceString: String) -> String {
+        return pattern.stringByReplacingMatches(in: self, with: replaceString)
+    }
+
+    public func replacingMatches(of pattern: StringPattern, handler: (StringMatch) -> String?) -> String {
+        return pattern.stringByReplacingMatches(in: self, replacementHandler: handler)
     }
 }
 

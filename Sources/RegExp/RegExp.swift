@@ -1,13 +1,9 @@
 import Foundation
 
 // TODO: Try to make similar to DatePattern
-// TODO: Add isMatching -> hasMatch()
-// TODO: Add =~ operator
 // TODO: Add replace with string
 // TODO: Add firstMatch
 // TODO: add escape()
-
-// https://jayeshkawli.ghost.io/regular-expressions-in-swift-ios/
 
 public struct RegExp: StringPattern {    
     private let nsRegExp: NSRegularExpression
@@ -33,11 +29,15 @@ public struct RegExp: StringPattern {
         }
     }
 
-    public func replace(in string: String, handler: (StringMatch) -> String?) -> String {
+    public func stringByReplacingMatches(in string: String, with replacementString: String) -> String {
+        return nsRegExp.stringByReplacingMatches(in: string, options: [], range: NSRange(string.startIndex..., in: string), withTemplate: replacementString)
+    }
+
+    public func stringByReplacingMatches(in string: String, replacementHandler: (StringMatch) -> String?) -> String {
         var string = string
         
         matches(in: string).reversed().forEach { match in
-            if let replacement = handler(match) {
+            if let replacement = replacementHandler(match) {
                 string = string.replacingCharacters(in: match.range, with: replacement)
             }
         }
