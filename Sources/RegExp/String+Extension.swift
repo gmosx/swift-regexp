@@ -1,3 +1,5 @@
+// TODO: Support StringProtocol
+
 extension String {
     public func isMatching(pattern: StringPattern) -> Bool {
         return pattern.hasMatch(in: self)
