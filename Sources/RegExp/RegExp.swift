@@ -3,13 +3,12 @@ import Foundation
 // TODO: Add firstMatch()
 // TODO: Add escape()
 
-public struct RegExp: StringPattern {    
+public struct RegExp: StringPattern {
     private let nsRegExp: NSRegularExpression
-    // private let options: NSRegularExpression.Options
 
-    public init(_ pattern: String) {
+    public init(_ pattern: String, options: NSRegularExpression.Options = []) {
         do {
-            nsRegExp = try NSRegularExpression(pattern: pattern)
+            nsRegExp = try NSRegularExpression(pattern: pattern, options: options)
         } catch {
             preconditionFailure("Illegal regular expression: \(pattern).")
         }
