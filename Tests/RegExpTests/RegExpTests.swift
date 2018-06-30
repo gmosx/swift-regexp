@@ -19,15 +19,15 @@ final class RegExpTests: XCTestCase {
         let allMatches = re.matches(in: text)
         
         XCTAssertEqual(allMatches.count, 4)
-        XCTAssertEqual(allMatches[0].string, "#1#**")
-        XCTAssertEqual(allMatches[3].string, "#/2#**")
+        XCTAssertEqual(allMatches[0].value, "#1#**")
+        XCTAssertEqual(allMatches[3].value, "#/2#**")
     }
 
     func testReplace() {
         let text = "bad wolf, bad dog, Bad sheep"
         let re = RegExp("\\b([bB]ad)\\b")
         let replaced = re.stringByReplacingMatches(in: text) { match in
-            return "[\(match.string.lowercased())]"
+            return "[\(match.value.lowercased())]"
         }
 
         XCTAssertEqual(replaced, "[bad] wolf, [bad] dog, [bad] sheep")
