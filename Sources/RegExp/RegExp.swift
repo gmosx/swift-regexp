@@ -1,9 +1,7 @@
 import Foundation
 
-// TODO: Try to make similar to DatePattern
-// TODO: Add replace with string
-// TODO: Add firstMatch
-// TODO: add escape()
+// TODO: Add firstMatch()
+// TODO: Add escape()
 
 public struct RegExp: StringPattern {    
     private let nsRegExp: NSRegularExpression

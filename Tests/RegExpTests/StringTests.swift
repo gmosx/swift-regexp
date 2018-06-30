@@ -6,7 +6,7 @@ class StringTests: XCTestCase {
         let text = "bad wolf, bad dog, Bad sheep"
 
         let replaced = text.replacingMatches(of: RegExp("\\b([bB]ad)\\b")) { match in
-            return "[\(match.value.lowercased())]"
+            return "[\(match.string.lowercased())]"
         }
 
         XCTAssertEqual(replaced, "[bad] wolf, [bad] dog, [bad] sheep")
