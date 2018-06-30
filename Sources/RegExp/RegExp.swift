@@ -20,9 +20,14 @@ public struct RegExp: StringPattern {
 
     public func matches(in string: String) -> [StringMatch] {
         let results = nsRegExp.matches(in: string, options: [], range: NSRange(string.startIndex..., in: string))
+
+        var index = 0
+
         return results.map { result in
             let range = Range(result.range, in: string)!
-            return StringMatch(value: String(string[range]), range: range)
+            let match = StringMatch(index: index, value: String(string[range]), range: range)
+            index += 1
+            return match
         }
     }
 
@@ -32,7 +37,7 @@ public struct RegExp: StringPattern {
 
     public func stringByReplacingMatches(in string: String, replacementHandler: (StringMatch) -> String?) -> String {
         var string = string
-        
+
         matches(in: string).reversed().forEach { match in
             if let replacement = replacementHandler(match) {
                 string = string.replacingCharacters(in: match.range, with: replacement)
