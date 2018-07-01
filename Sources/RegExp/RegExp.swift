@@ -28,8 +28,8 @@ public struct RegExp: StringPattern {
         }
     }
 
-    public func stringByReplacingMatches(in string: String, with replacementString: String) -> String {
-        return nsRegExp.stringByReplacingMatches(in: string, options: [], range: NSRange(string.startIndex..., in: string), withTemplate: replacementString)
+    public func stringByReplacingMatches(in string: String, with replacementTemplate: String) -> String {
+        return nsRegExp.stringByReplacingMatches(in: string, options: [], range: NSRange(string.startIndex..., in: string), withTemplate: replacementTemplate)
     }
 
     public func stringByReplacingMatches(in string: String, replacementHandler: (StringMatch) -> String?) -> String {
