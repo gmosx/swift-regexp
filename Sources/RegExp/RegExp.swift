@@ -22,8 +22,14 @@ public struct RegExp: StringPattern {
         let results = nsRegExp.matches(in: string, options: [], range: NSRange(string.startIndex..., in: string))
 
         return results.map { result in
-            let range = Range(result.range, in: string)!
-            let match = StringMatch(value: String(string[range]), range: range)
+            // TODO: optimize here!
+            var ranges: [Range<String.Index>] = []
+
+            for i in 0..<result.numberOfRanges {
+                ranges.append(Range(result.range(at: i), in: string)!)
+            }
+            
+            let match = StringMatch(value: String(string[ranges[0]]), ranges: ranges)
             return match
         }
     }
